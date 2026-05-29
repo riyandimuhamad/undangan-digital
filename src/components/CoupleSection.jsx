@@ -20,27 +20,7 @@ const CoupleSection = ({ data }) => {
     <section id="mempelai" className="py-20 px-6 relative text-center">
       
       {/* Bride Section */}
-      <div className="flex flex-col items-center mb-20" data-aos="fade-up">
-        
-        {/* Arch Image Container with Flowers */}
-        <div className="relative w-56 h-72 md:w-64 md:h-80 mx-auto mb-8">
-          {/* Decorative Flowers */}
-          <FlowerDecor className="absolute -top-8 -left-8 w-24 h-24 text-ice-blue z-20 -rotate-12 drop-shadow-md" />
-          <FlowerDecor className="absolute -bottom-8 -right-8 w-28 h-28 text-ice-blue-light z-20 rotate-45 drop-shadow-md" />
-          
-          {/* Aesthetic Arch Frame */}
-          <div 
-            className="w-full h-full overflow-hidden border-8 border-white shadow-[0_15px_40px_rgb(122,155,184,0.3)] bg-slate-50 relative z-10"
-            style={{ borderRadius: '140px 140px 16px 16px' }}
-          >
-            <div className="absolute inset-0 border border-ice-blue/20 m-2 rounded-[130px_130px_12px_12px]"></div>
-            <img 
-              src={data.bridePhoto} 
-              alt={data.brideFullName} 
-              className="w-full h-full object-cover mix-blend-multiply"
-            />
-          </div>
-        </div>
+      <div className="flex flex-col items-center mb-16" data-aos="fade-up">
         
         <p className="font-serif text-ice-navy/80 text-xs mb-1 italic">Putri dari</p>
         <p className="font-sans text-xs font-light text-ice-navy leading-relaxed mb-6">
@@ -58,27 +38,7 @@ const CoupleSection = ({ data }) => {
       </div>
 
       {/* Groom Section */}
-      <div className="flex flex-col items-center" data-aos="fade-up">
-        
-        {/* Arch Image Container with Flowers */}
-        <div className="relative w-56 h-72 md:w-64 md:h-80 mx-auto mb-8">
-          {/* Decorative Flowers */}
-          <FlowerDecor className="absolute -top-8 -right-8 w-24 h-24 text-ice-blue z-20 rotate-12 drop-shadow-md" />
-          <FlowerDecor className="absolute -bottom-8 -left-8 w-28 h-28 text-ice-blue-light z-20 -rotate-45 drop-shadow-md" />
-          
-          {/* Aesthetic Arch Frame */}
-          <div 
-            className="w-full h-full overflow-hidden border-8 border-white shadow-[0_15px_40px_rgb(122,155,184,0.3)] bg-slate-50 relative z-10"
-            style={{ borderRadius: '140px 140px 16px 16px' }}
-          >
-            <div className="absolute inset-0 border border-ice-blue/20 m-2 rounded-[130px_130px_12px_12px]"></div>
-            <img 
-              src={data.groomPhoto} 
-              alt={data.groomFullName} 
-              className="w-full h-full object-cover mix-blend-multiply"
-            />
-          </div>
-        </div>
+      <div className="flex flex-col items-center mb-8" data-aos="fade-up">
         
         <p className="font-serif text-ice-navy/80 text-xs mb-1 italic">Putra dari</p>
         <p className="font-sans text-xs font-light text-ice-navy leading-relaxed mb-6">

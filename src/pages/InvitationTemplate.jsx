@@ -11,18 +11,13 @@ import BottomNav from '../components/BottomNav';
 import QuotesSection from '../components/QuotesSection';
 import CoupleSection from '../components/CoupleSection';
 
-// Simple SVG Flowers for decoration
-const FlowerTopLeft = () => (
-  <svg className="w-32 h-32 text-ice-blue opacity-50" viewBox="0 0 100 100" fill="currentColor">
-    <path d="M50 0C50 25 75 50 100 50C75 50 50 75 50 100C50 75 25 50 0 50C25 50 50 25 50 0Z" />
-    <circle cx="50" cy="50" r="10" fill="white" />
-  </svg>
-);
-
-const FlowerBottomRight = () => (
-  <svg className="w-40 h-40 text-ice-blue-light opacity-40" viewBox="0 0 100 100" fill="currentColor">
-    <path d="M50 0C50 25 75 50 100 50C75 50 50 75 50 100C50 75 25 50 0 50C25 50 50 25 50 0Z" />
-    <circle cx="50" cy="50" r="15" fill="white" opacity="0.5" />
+// Minimalist line-art leaf for decoration (replacing abstract watercolor flowers)
+const LineArtLeaf = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22c4-4 8-10 8-14a4 4 0 0 0-8 0c0-4-4-4-8 0-4 4 0 10 8 14z"/>
+    <path d="M12 22V8"/>
+    <path d="M12 14c-1.5-1.5-3-2-5-2"/>
+    <path d="M12 18c2-1 4.5-1.5 6-1.5"/>
   </svg>
 );
 
@@ -61,18 +56,18 @@ const InvitationTemplate = () => {
 
   if (!data) {
     return (
-      <div className="flex h-screen w-screen items-center justify-center bg-white">
+      <div className="flex h-[100dvh] w-screen items-center justify-center bg-white">
         <h1 className="text-xl font-serif text-ice-navy">Undangan tidak ditemukan</h1>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen bg-white font-sans text-ice-navy">
-      {/* Fixed Watercolor Background */}
+    <div className="relative min-h-[100dvh] bg-[#f9f8f6] font-sans text-ice-navy">
+      {/* Textured Watercolor Background (Tinted to match theme) */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0"
-        style={{ backgroundImage: `url(/bg-watercolor.png)`, opacity: 0.8 }}
+        className="fixed top-0 left-0 w-full h-[100dvh] bg-cover bg-center bg-no-repeat pointer-events-none z-0 opacity-30 mix-blend-multiply grayscale sepia-[.3]"
+        style={{ backgroundImage: `url(/bg-watercolor.png)` }}
       ></div>
 
       {!isOpened ? (
@@ -80,26 +75,26 @@ const InvitationTemplate = () => {
       ) : (
         <div className="relative z-10 animate-fade-in pb-20">
           
-          {/* Animated Flowers */}
+          {/* Animated Minimalist Leaves */}
           <div className="fixed top-0 left-0 z-20 pointer-events-none animate-flower-tl -translate-x-4 -translate-y-4">
-            <FlowerTopLeft />
+            <LineArtLeaf className="w-40 h-40 text-ice-navy/20 rotate-[135deg]" />
           </div>
           <div className="fixed bottom-0 right-0 z-20 pointer-events-none animate-flower-br translate-x-4 translate-y-4">
-            <FlowerBottomRight />
+            <LineArtLeaf className="w-48 h-48 text-ice-navy/10 -rotate-[45deg]" />
           </div>
 
           {data.musicUrl && <AudioPlayer url={data.musicUrl} />}
           
-          <main className="max-w-md mx-auto min-h-screen bg-white/70 backdrop-blur-sm shadow-2xl shadow-ice-navy/5 pb-24">
+          <main className="max-w-md mx-auto min-h-[100dvh] bg-white/70 backdrop-blur-sm shadow-2xl shadow-ice-navy/5 pb-24">
             {/* Hero Section inside Invitation */}
-            <section id="opening" className="relative h-[60vh] flex flex-col items-center justify-center text-center p-8 overflow-hidden rounded-b-[2rem]">
+            <section id="opening" className="relative min-h-[60dvh] flex flex-col items-center justify-center text-center p-8 overflow-hidden rounded-b-[2rem]">
               <div className="z-10 animate-slide-up mt-10">
                 <div className="flex flex-col items-center justify-center space-y-1 mb-8">
-                  <h1 className="text-6xl md:text-7xl font-script text-ice-navy">
+                  <h1 className="text-6xl md:text-7xl font-script text-ice-navy tracking-wider">
                     {data.groom}
                   </h1>
-                  <span className="text-3xl font-serif font-light text-ice-blue-light my-2">&</span>
-                  <h1 className="text-6xl md:text-7xl font-script text-ice-navy">
+                  <span className="text-4xl font-serif font-light text-ice-blue my-4">&</span>
+                  <h1 className="text-6xl md:text-7xl font-script text-ice-navy tracking-wider">
                     {data.bride}
                   </h1>
                 </div>
@@ -113,7 +108,6 @@ const InvitationTemplate = () => {
             <CoupleSection data={data} />
             <div id="quotes"><QuotesSection /></div>
             <div id="acara"><EventDetails data={data} /></div>
-            <div id="galeri"><Gallery images={data.gallery} /></div>
             <div id="gift"><GiftSection bankDetails={data.bankDetails} /></div>
             <div id="rsvp"><RSVPForm slug={slug} guestName={guestName} /></div>
             

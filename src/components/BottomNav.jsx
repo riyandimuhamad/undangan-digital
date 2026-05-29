@@ -9,7 +9,6 @@ const BottomNav = () => {
     { id: 'mempelai', label: 'Mempelai', icon: Heart },
     { id: 'quotes', label: 'Quotes', icon: BookText },
     { id: 'acara', label: 'Acara', icon: Calendar },
-    { id: 'galeri', label: 'Galeri', icon: ImageIcon },
     { id: 'gift', label: 'Gift', icon: Gift },
     { id: 'rsvp', label: 'RSVP', icon: Send },
   ];

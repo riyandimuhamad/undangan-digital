@@ -18,21 +18,22 @@ export const db = getFirestore(app);
 // MOCK DATA for MVP without real Firebase setup yet
 export const mockInvitationData = {
   "sample-wedding": {
-    bride: "Calon perempuan",
-    brideFullName: "Calon Perempuan",
-    brideParents: "Bapak Nama Ayah & Ibu Nama Ibu",
+    bride: "Revi",
+    brideFullName: "Revi Meriskha",
+    brideParents: "Bapak Iman Pirmansyah & Ibu Teni Safitri",
     bridePhoto: "https://api.dicebear.com/7.x/avataaars/svg?seed=bride1&backgroundColor=f8fafc",
     groom: "Adam",
-    groomFullName: "Adam",
-    groomParents: "Bapak Nama Ayah & Ibu Nama Ibu",
+    groomFullName: "Adam Siva Kusdinar",
+    groomParents: "Bapak H. Agus & Ibu Hj. Nurhayati",
     groomPhoto: "https://api.dicebear.com/7.x/avataaars/svg?seed=groom1&backgroundColor=f8fafc",
-    date: "2026-06-18T08:00:00",
+    date: "2026-06-18T09:00:00",
     displayDate: "18 JUNI 2026",
-    displayTime: "08.00 WIB",
+    displayTime: "09.00 WIB",
     location: {
-      name: "Grand Ballroom, Ritz Hotel",
-      address: "123 Wedding Lane, City Center",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.305141208945!2d106.82274931476906!3d-6.223447995494498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3f4c6579899%3A0x6e76d91d1e4c7674!2sThe%20Ritz-Carlton%20Jakarta%2C%20Mega%20Kuningan!5e0!3m2!1sen!2sid!4v1655182961525!5m2!1sen!2sid"
+      name: "Kediaman Mempelai Wanita",
+      address: "Kp Ciwangsa, RW.01, Tanjung, Kawalu, Tasikmalaya, Jawa Barat",
+      mapUrl: "https://maps.google.com/maps?q=-7.395803167564179,108.1955547916187&t=&z=17&ie=UTF8&iwloc=&output=embed",
+      linkUrl: "https://www.google.com/maps/dir/?api=1&destination=-7.395803167564179,108.1955547916187"
     },
     gallery: [
       "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop",

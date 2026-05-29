@@ -9,10 +9,10 @@
   --color-slate-500: #64748b;
   --color-slate-800: #1e293b;
   
-  /* Ice Silver specific colors */
-  --color-ice-blue: #7a9bb8;
-  --color-ice-blue-light: #9ebeda;
-  --color-ice-navy: #4a6b8c;
+  /* Warm dark brown/sepia monochromatic theme */
+  --color-ice-blue: #786859;
+  --color-ice-blue-light: #e6dfd8;
+  --color-ice-navy: #2c241b;
 
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Playfair Display', serif;
@@ -51,7 +51,7 @@ html {
 }
 
 body {
-  @apply bg-white text-ice-navy font-sans;
+  @apply bg-[#f9f8f6] text-ice-navy font-sans;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
