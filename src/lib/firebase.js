@@ -42,10 +42,11 @@ export const mockInvitationData = {
       "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
     ],
     bankDetails: {
-      bank: "BCA",
-      accountNumber: "1234567890",
-      accountName: "John Doe"
+      bank: "SeaBank",
+      accountNumber: "901256971505",
+      accountName: "Adam Siva Kusdinar"
     },
-    musicUrl: "https://www.bensound.com/bensound-music/bensound-tenderness.mp3"
+    // Karena banyak website memblokir hotlinking, sangat disarankan menggunakan file mp3 sendiri
+    musicUrl: "/wedding-song.mp3"
   }
 };

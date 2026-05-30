@@ -41,7 +41,7 @@ const BottomNav = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-4 px-4 pointer-events-none">
+    <div className="fixed bottom-0 left-0 right-0 z-[90] flex justify-center pb-4 px-4 pointer-events-none">
       <div className="bg-ice-blue/90 backdrop-blur-md rounded-2xl shadow-lg pointer-events-auto flex items-center justify-between w-full max-w-md p-2 overflow-x-auto gap-2 scrollbar-hide">
         {navItems.map((item) => {
           const Icon = item.icon;

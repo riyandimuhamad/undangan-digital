@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { mockInvitationData } from '../lib/firebase';
 import CoverPage from '../components/CoverPage';
@@ -11,13 +11,36 @@ import BottomNav from '../components/BottomNav';
 import QuotesSection from '../components/QuotesSection';
 import CoupleSection from '../components/CoupleSection';
 
-// Minimalist line-art leaf for decoration (replacing abstract watercolor flowers)
-const LineArtLeaf = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22c4-4 8-10 8-14a4 4 0 0 0-8 0c0-4-4-4-8 0-4 4 0 10 8 14z"/>
-    <path d="M12 22V8"/>
-    <path d="M12 14c-1.5-1.5-3-2-5-2"/>
-    <path d="M12 18c2-1 4.5-1.5 6-1.5"/>
+// Elegant Center Divider Ornament
+const DividerOrnament = ({ className }) => (
+  <svg className={className} viewBox="0 0 200 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20,15 L80,15 M120,15 L180,15" stroke="currentColor" strokeWidth="0.5" opacity="0.5"/>
+    <path d="M100,5 C95,10 90,15 85,15 C90,15 95,20 100,25 C105,20 110,15 115,15 C110,15 105,10 100,5 Z" opacity="0.8"/>
+    <circle cx="100" cy="15" r="2" fill="#fff"/>
+    <circle cx="60" cy="15" r="1.5" opacity="0.4"/>
+    <circle cx="140" cy="15" r="1.5" opacity="0.4"/>
+  </svg>
+);
+
+const FloralArch = ({ className }) => (
+  <svg className={className} viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Main central flower (lotus/batik style) */}
+    <path d="M150,70 Q 120,50 150,20 Q 180,50 150,70 Z" fill="currentColor" fillOpacity="0.1"/>
+    <path d="M150,60 Q 135,45 150,30 Q 165,45 150,60 Z" fill="currentColor" fillOpacity="0.3"/>
+    <path d="M150,70 Q 110,60 120,30 Q 135,50 150,70 Z" fill="currentColor" fillOpacity="0.1"/>
+    <path d="M150,70 Q 190,60 180,30 Q 165,50 150,70 Z" fill="currentColor" fillOpacity="0.1"/>
+    {/* Left vine */}
+    <path d="M130,50 C 90,30 50,50 10,20" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5"/>
+    <path d="M90,40 Q 70,20 60,35 Q 75,45 90,40 Z" fill="currentColor" fillOpacity="0.2"/>
+    <path d="M60,35 Q 40,15 30,30 Q 45,40 60,35 Z" fill="currentColor" fillOpacity="0.2"/>
+    <circle cx="50" cy="50" r="1.5" fill="currentColor" fillOpacity="0.4"/>
+    <circle cx="80" cy="20" r="1" fill="currentColor" fillOpacity="0.4"/>
+    {/* Right vine */}
+    <path d="M170,50 C 210,30 250,50 290,20" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5"/>
+    <path d="M210,40 Q 230,20 240,35 Q 225,45 210,40 Z" fill="currentColor" fillOpacity="0.2"/>
+    <path d="M240,35 Q 260,15 270,30 Q 255,40 240,35 Z" fill="currentColor" fillOpacity="0.2"/>
+    <circle cx="250" cy="50" r="1.5" fill="currentColor" fillOpacity="0.4"/>
+    <circle cx="220" cy="20" r="1" fill="currentColor" fillOpacity="0.4"/>
   </svg>
 );
 
@@ -29,6 +52,50 @@ const InvitationTemplate = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isOpened, setIsOpened] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const handleOpenInvitation = () => {
+    setIsOpened(true);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 63; // Mulai dari menit ke 1:03
+      audioRef.current.volume = 0; // Mulai dari 0 untuk efek fade-in
+      
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            
+            // Efek Fade-in perlahan selama ~1 detik
+            let currentVol = 0;
+            const targetVol = 0.5;
+            const fadeInterval = setInterval(() => {
+              if (currentVol < targetVol) {
+                currentVol += 0.02; // Naikkan volume sedikit demi sedikit
+                if (currentVol > targetVol) currentVol = targetVol;
+                if (audioRef.current) audioRef.current.volume = currentVol;
+              } else {
+                clearInterval(fadeInterval);
+              }
+            }, 50); // Eksekusi setiap 50ms
+          })
+          .catch((err) => {
+            console.error("Autoplay prevented:", err);
+            setIsPlaying(false);
+          });
+      }
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      // 3 menit 35 detik = 215 detik
+      if (audioRef.current.currentTime >= 215) {
+        audioRef.current.currentTime = 63; // Loop kembali ke menit 1:03
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,25 +137,35 @@ const InvitationTemplate = () => {
         style={{ backgroundImage: `url(/bg-watercolor.png)` }}
       ></div>
 
+      {data.musicUrl && (
+        <audio 
+          ref={audioRef} 
+          src={data.musicUrl} 
+          loop 
+          preload="auto" 
+          onTimeUpdate={handleTimeUpdate}
+        />
+      )}
+
       {!isOpened ? (
-        <CoverPage data={data} guestName={guestName} onOpen={() => setIsOpened(true)} />
+        <CoverPage data={data} guestName={guestName} onOpen={handleOpenInvitation} />
       ) : (
         <div className="relative z-10 animate-fade-in pb-20">
           
-          {/* Animated Minimalist Leaves */}
-          <div className="fixed top-0 left-0 z-20 pointer-events-none animate-flower-tl -translate-x-4 -translate-y-4">
-            <LineArtLeaf className="w-40 h-40 text-ice-navy/20 rotate-[135deg]" />
-          </div>
-          <div className="fixed bottom-0 right-0 z-20 pointer-events-none animate-flower-br translate-x-4 translate-y-4">
-            <LineArtLeaf className="w-48 h-48 text-ice-navy/10 -rotate-[45deg]" />
-          </div>
-
-          {data.musicUrl && <AudioPlayer url={data.musicUrl} />}
+          {data.musicUrl && (
+            <AudioPlayer audioRef={audioRef} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+          )}
           
-          <main className="max-w-md mx-auto min-h-[100dvh] bg-white/70 backdrop-blur-sm shadow-2xl shadow-ice-navy/5 pb-24">
+          <main className="max-w-md mx-auto min-h-[100dvh] bg-gradient-to-br from-[#fdfbf9] via-[#f9f8f6] to-[#eae5df] shadow-2xl shadow-black/30 relative overflow-hidden">
+            {/* Top Floral Arch */}
+            <div className="w-full flex justify-center pt-10">
+              <FloralArch className="w-64 h-24 text-ice-navy opacity-70" />
+            </div>
+            
             {/* Hero Section inside Invitation */}
-            <section id="opening" className="relative min-h-[60dvh] flex flex-col items-center justify-center text-center p-8 overflow-hidden rounded-b-[2rem]">
-              <div className="z-10 animate-slide-up mt-10">
+            <section id="opening" className="relative min-h-[60dvh] flex flex-col items-center justify-center text-center pt-8 px-8 pb-24 overflow-hidden">
+              <div className="z-10 animate-slide-up mt-10 w-full flex flex-col items-center">
+                <DividerOrnament className="w-48 h-12 text-ice-navy mb-8 opacity-60" />
                 <div className="flex flex-col items-center justify-center space-y-1 mb-8">
                   <h1 className="text-6xl md:text-7xl font-script text-ice-navy tracking-wider">
                     {data.groom}
@@ -98,6 +175,7 @@ const InvitationTemplate = () => {
                     {data.bride}
                   </h1>
                 </div>
+                <DividerOrnament className="w-48 h-12 text-ice-navy mt-4 mb-8 opacity-60" />
                 <p className="font-serif italic text-ice-navy text-lg mb-4">Assalamu'alaikum Wr Wb</p>
                 <p className="font-sans text-sm font-light text-ice-navy leading-relaxed px-4 max-w-sm mx-auto">
                   Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i pada acara resepsi pernikahan kami
@@ -111,17 +189,22 @@ const InvitationTemplate = () => {
             <div id="gift"><GiftSection bankDetails={data.bankDetails} /></div>
             <div id="rsvp"><RSVPForm slug={slug} guestName={guestName} /></div>
             
-            <footer className="py-16 px-8 text-center text-ice-navy bg-transparent relative z-10">
-              <p className="font-sans text-sm font-light leading-relaxed mb-8">
+            <footer className="py-24 px-8 text-center bg-[#2c241b] text-[#f9f8f6] relative rounded-t-[3rem] -mt-12 shadow-[0_-15px_40px_rgba(0,0,0,0.2)] z-[70]">
+              <p className="font-sans text-sm font-light leading-relaxed mb-8 text-white/80">
                 Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir dan memberikan do'a restu kepada kedua mempelai.
               </p>
-              <p className="font-serif italic text-sm mb-4">
+              <p className="font-serif italic text-sm mb-4 text-white/60">
                 Hormat Kami Yang Mengundang
               </p>
-              <h2 className="text-5xl md:text-6xl font-script text-ice-navy mt-4">
-                {data.groom} <span className="font-sans text-3xl font-light mx-2">&</span> {data.bride}
+              <h2 className="text-5xl md:text-6xl font-script text-[#f9f8f6] mt-4">
+                {data.groom} <span className="font-sans text-3xl font-light mx-2 text-[#d4c3b3]">&</span> {data.bride}
               </h2>
             </footer>
+
+            {/* Bottom Floral Arch */}
+            <div className="w-full flex justify-center pb-10 bg-ice-navy">
+              <FloralArch className="w-64 h-24 text-[#f9f8f6] opacity-40 rotate-180" />
+            </div>
           </main>
           
           <BottomNav />

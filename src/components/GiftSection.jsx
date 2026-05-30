@@ -1,28 +1,54 @@
 import React, { useState } from 'react';
+import ScrollReveal from './ScrollReveal';
 import { Gift, Copy, CheckCircle2 } from 'lucide-react';
 
 const GiftSection = ({ bankDetails }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(bankDetails.accountNumber);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const textToCopy = bankDetails.accountNumber;
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        })
+        .catch(err => console.error("Clipboard copy failed", err));
+    } else {
+      // Fallback for non-secure contexts (HTTP IP address testing on mobile)
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(textArea);
+    }
   };
 
   if (!bankDetails) return null;
 
   return (
-    <section className="py-16 px-6 bg-transparent">
-      <div className="text-center mb-12">
+    <section className="py-24 px-6 relative bg-gradient-to-b from-[#f9f8f6] to-[#f0ece6] rounded-t-[3rem] -mt-12 shadow-[0_-15px_40px_rgba(0,0,0,0.08)] z-50">
+      <ScrollReveal className="text-center mb-12">
         <h2 className="text-3xl font-serif text-ice-navy mb-3">Wedding Gift</h2>
         <div className="w-12 h-[1px] bg-slate-300 mx-auto"></div>
         <p className="text-slate-500 mt-6 text-sm max-w-sm mx-auto font-sans font-light leading-relaxed">
           Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini.
         </p>
-      </div>
+      </ScrollReveal>
 
-      <div className="max-w-xs mx-auto bg-white p-8 rounded-[16px] shadow-[0_8px_30px_rgb(148,163,184,0.1)] border border-slate-100 relative overflow-hidden">
+      <ScrollReveal delay={200} className="max-w-xs mx-auto bg-white p-8 rounded-[16px] shadow-[0_8px_30px_rgb(148,163,184,0.1)] border border-slate-100 relative overflow-hidden">
         {/* Subtle decorative element - Silver */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100px] -mr-8 -mt-8 opacity-70 z-0 border-b border-l border-slate-100"></div>
         
@@ -54,7 +80,7 @@ const GiftSection = ({ bankDetails }) => {
             )}
           </button>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

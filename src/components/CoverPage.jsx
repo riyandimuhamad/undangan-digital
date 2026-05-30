@@ -1,5 +1,27 @@
 import React, { useEffect, useState } from 'react';
 
+const FloralArch = ({ className }) => (
+  <svg className={className} viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Main central flower (lotus/batik style) */}
+    <path d="M150,70 Q 120,50 150,20 Q 180,50 150,70 Z" fill="currentColor" fillOpacity="0.1"/>
+    <path d="M150,60 Q 135,45 150,30 Q 165,45 150,60 Z" fill="currentColor" fillOpacity="0.3"/>
+    <path d="M150,70 Q 110,60 120,30 Q 135,50 150,70 Z" fill="currentColor" fillOpacity="0.1"/>
+    <path d="M150,70 Q 190,60 180,30 Q 165,50 150,70 Z" fill="currentColor" fillOpacity="0.1"/>
+    {/* Left vine */}
+    <path d="M130,50 C 90,30 50,50 10,20" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5"/>
+    <path d="M90,40 Q 70,20 60,35 Q 75,45 90,40 Z" fill="currentColor" fillOpacity="0.2"/>
+    <path d="M60,35 Q 40,15 30,30 Q 45,40 60,35 Z" fill="currentColor" fillOpacity="0.2"/>
+    <circle cx="50" cy="50" r="1.5" fill="currentColor" fillOpacity="0.4"/>
+    <circle cx="80" cy="20" r="1" fill="currentColor" fillOpacity="0.4"/>
+    {/* Right vine */}
+    <path d="M170,50 C 210,30 250,50 290,20" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5"/>
+    <path d="M210,40 Q 230,20 240,35 Q 225,45 210,40 Z" fill="currentColor" fillOpacity="0.2"/>
+    <path d="M240,35 Q 260,15 270,30 Q 255,40 240,35 Z" fill="currentColor" fillOpacity="0.2"/>
+    <circle cx="250" cy="50" r="1.5" fill="currentColor" fillOpacity="0.4"/>
+    <circle cx="220" cy="20" r="1" fill="currentColor" fillOpacity="0.4"/>
+  </svg>
+);
+
 const CoverPage = ({ data, guestName, onOpen }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -19,12 +41,15 @@ const CoverPage = ({ data, guestName, onOpen }) => {
         style={{ backgroundImage: `url(/bg-watercolor.png)` }}
       ></div>
       {/* Decorative Ornaments from the theme */}
-      <div className="absolute top-0 left-0 w-64 h-64 border-t-[1px] border-l-[1px] border-ice-navy/20 rounded-tl-3xl -translate-x-4 -translate-y-4 pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 border-b-[1px] border-r-[1px] border-ice-navy/20 rounded-br-3xl translate-x-4 translate-y-4 pointer-events-none"></div>
       <div className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-md mx-auto h-full justify-between py-12 md:py-16">
 
         {/* Top Section */}
-        <div className="flex flex-col items-center mt-8">
+        <div className="flex flex-col items-center mt-2">
+          <div 
+            className={`transition-all duration-1000 transform ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+          >
+            <FloralArch className="w-64 h-24 text-ice-navy mb-4 opacity-70" />
+          </div>
           <div
             className={`transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             style={{ transitionDelay: '300ms' }}

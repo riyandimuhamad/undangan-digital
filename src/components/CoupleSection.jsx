@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
 const FlowerDecor = ({ className }) => (
   <svg className={className} viewBox="0 0 100 100" fill="currentColor">
@@ -17,38 +18,38 @@ const InstagramIcon = ({ className }) => (
 
 const CoupleSection = ({ data }) => {
   return (
-    <section id="mempelai" className="py-20 px-6 relative text-center">
+    <section id="mempelai" className="py-24 px-6 relative text-center bg-[#2c241b] text-[#f9f8f6] rounded-t-[3rem] -mt-12 shadow-[0_-15px_40px_rgba(0,0,0,0.2)] z-20">
       
       {/* Bride Section */}
-      <div className="flex flex-col items-center mb-16" data-aos="fade-up">
+      <ScrollReveal className="flex flex-col items-center mb-16">
         
-        <p className="font-serif text-ice-navy/80 text-xs mb-1 italic">Putri dari</p>
-        <p className="font-sans text-xs font-light text-ice-navy leading-relaxed mb-6">
+        <p className="font-serif text-[#d4c3b3] text-xs mb-1 italic">Putri dari</p>
+        <p className="font-sans text-xs font-light text-white/80 leading-relaxed mb-6">
           {data.brideParents}
         </p>
         
-        <h2 className="text-5xl md:text-6xl font-script text-ice-navy mt-2">
+        <h2 className="text-5xl md:text-6xl font-script text-[#f9f8f6] mt-2">
           {data.brideFullName}
         </h2>
-      </div>
+      </ScrollReveal>
 
       {/* Decorative Ampersand */}
-      <div className="flex justify-center mb-20">
-        <span className="text-7xl font-script text-ice-blue-light">&</span>
-      </div>
+      <ScrollReveal delay={200} className="flex justify-center mb-20">
+        <span className="text-7xl font-script text-[#d4c3b3]">&</span>
+      </ScrollReveal>
 
       {/* Groom Section */}
-      <div className="flex flex-col items-center mb-8" data-aos="fade-up">
+      <ScrollReveal delay={400} className="flex flex-col items-center mb-8">
         
-        <p className="font-serif text-ice-navy/80 text-xs mb-1 italic">Putra dari</p>
-        <p className="font-sans text-xs font-light text-ice-navy leading-relaxed mb-6">
+        <p className="font-serif text-[#d4c3b3] text-xs mb-1 italic">Putra dari</p>
+        <p className="font-sans text-xs font-light text-white/80 leading-relaxed mb-6">
           {data.groomParents}
         </p>
 
-        <h2 className="text-5xl md:text-6xl font-script text-ice-navy mt-2">
+        <h2 className="text-5xl md:text-6xl font-script text-[#f9f8f6] mt-2">
           {data.groomFullName}
         </h2>
-      </div>
+      </ScrollReveal>
 
     </section>
   );
