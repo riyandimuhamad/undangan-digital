@@ -33,7 +33,7 @@ const CoverPage = ({ data, guestName, onOpen }) => {
 
   return (
     <div
-      className="fixed top-0 left-0 w-full h-[100dvh] z-50 flex flex-col items-center justify-center text-ice-navy overflow-hidden bg-[#f9f8f6] animate-fade-in touch-none"
+      className="fixed top-0 left-0 w-full h-[100dvh] z-50 flex flex-col items-center justify-center text-ice-navy overflow-y-auto bg-[#f9f8f6] animate-fade-in"
     >
       {/* Textured Watercolor Background (Tinted) - Fixed to viewport with bleed for overscroll */}
       <div
