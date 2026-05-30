@@ -58,7 +58,7 @@ const InvitationTemplate = () => {
   const handleOpenInvitation = () => {
     setIsOpened(true);
     if (audioRef.current) {
-      audioRef.current.currentTime = 63; // Mulai dari menit ke 1:03
+      audioRef.current.currentTime = 67; // Mulai dari menit ke 1:07
       audioRef.current.volume = 0; // Mulai dari 0 untuk efek fade-in
       
       const playPromise = audioRef.current.play();
@@ -92,7 +92,7 @@ const InvitationTemplate = () => {
     if (audioRef.current) {
       // 3 menit 35 detik = 215 detik
       if (audioRef.current.currentTime >= 215) {
-        audioRef.current.currentTime = 63; // Loop kembali ke menit 1:03
+        audioRef.current.currentTime = 67; // Loop kembali ke menit 1:07
       }
     }
   };

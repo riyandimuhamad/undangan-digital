@@ -47,6 +47,6 @@ export const mockInvitationData = {
       accountName: "Adam Siva Kusdinar"
     },
     // Karena banyak website memblokir hotlinking, sangat disarankan menggunakan file mp3 sendiri
-    musicUrl: "/wedding-song.mp3"
+    musicUrl: "/wedding-song1.mp3"
   }
 };
