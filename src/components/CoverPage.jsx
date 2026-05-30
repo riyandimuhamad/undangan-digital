@@ -82,9 +82,6 @@ const CoverPage = ({ data, guestName, onOpen }) => {
             <p className="text-sm font-serif tracking-widest text-ice-navy uppercase">
               {data.displayDate}
             </p>
-            <p className="text-sm font-serif tracking-widest text-ice-navy uppercase">
-              {data.displayTime}
-            </p>
           </div>
         </div>
 
